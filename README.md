@@ -1,59 +1,153 @@
-# MetricasCoe
+# 📊 CoE Metrics Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Plataforma de visualización de métricas de calidad y ejecución de pruebas para equipos y Centros de Excelencia (CoE).
 
-## Development server
+Este proyecto simula una arquitectura **cloud-ready** basada en AWS, enfocándose en **comportamiento y diseño**, no en dependencias tecnológicas reales.
 
-To start a local development server, run:
+---
 
+## 🎯 Objetivo del Proyecto
+
+- Centralizar métricas de calidad y ejecución de pruebas
+- Permitir análisis por:
+  - Tribu
+  - CoE
+  - Equipo
+  - Rango de fechas
+- Simular un backend escalable y migrable a AWS (DynamoDB + Lambda)
+
+---
+
+## 🧱 Arquitectura (Simulación AWS)
+
+
+### Equivalencia AWS
+
+| Capa del proyecto | Equivalente AWS |
+|------------------|----------------|
+| Controller | API Gateway |
+| Service | Lambda |
+| Repository | DynamoDB SDK |
+| data/*.js | Tabla DynamoDB |
+
+---
+
+## 🔧 Backend
+
+### Endpoints principales
+
+#### Calidad de testing
+- `GET /api/metrics`
+- `GET /api/metrics?from=YYYY-MM-DD&to=YYYY-MM-DD`
+- `GET /api/metrics/:equipo`
+
+#### Ejecución de pruebas (performances)
+- `GET /api/ejecucion`
+- `GET /api/ejecucion?from=YYYY-MM-DD&to=YYYY-MM-DD`
+- `GET /api/ejecucion/:equipo`
+
+### Diseño del backend
+
+- **Controllers**: manejo HTTP y validaciones
+- **Services**: lógica de negocio y normalización
+- **Repositories**: acceso a datos simulando DynamoDB
+- **Data**: mock de datos con timestamps (fecha)
+
+La migración a AWS solo requeriría cambiar la capa `repository`.
+
+---
+
+## 🎨 Frontend (Angular)
+
+### Características UX/UI
+
+- Dashboard limpio y moderno (TailwindCSS)
+- Filtros desacoplados y reutilizables:
+  - Tribu
+  - CoE
+  - Búsqueda por equipo
+  - Filtro de fechas con presets y fecha específica
+- **Regla UX clave**:
+  > No se muestran datos hasta que el usuario interactúa con los filtros
+
+### Filtro de fechas (UX optimizado)
+
+- Presets rápidos:
+  - Hoy
+  - Últimos 7 / 14 / 30 días
+  - Este mes
+  - Mes anterior
+  - Histórico
+- Fecha puntual opcional
+- Chip visible solo cuando hay filtro activo
+- Opción clara para limpiar filtro
+
+---
+
+## 🚀 Cómo ejecutar
+
+### Backend
 ```bash
-ng serve
-```
+npm install
+node server.js
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+La arquitectura está diseñada para **simular AWS por comportamiento**, manteniendo una separación clara de responsabilidades.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+Separación por capas
+✔ Repository = Dynamo
+✔ Helper = Lambda
+✔ Query params from / to listos
+✔ Migración futura a AWS directa
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+dinamo vs local
 
-```bash
-ng generate --help
-```
+dynamo:
+DynamoDB         → Repository
+Lambda           → Service
+API Gateway      → Controller (Express)
 
-## Building
+local:
+/data           → simulación Dynamo (JSON / arrays)
+/repositories   → acceso a datos (Scan / Query / GetItem)
+/services       → reglas de negocio (Lambda)
+/controllers    → HTTP / Express
 
-To build the project run:
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+que se logró?
+✔ Backend desacoplado
+✔ Simulación real de AWS
+✔ Fácil migración a Lambdas
+✔ Controllers = API Gateway
+✔ Services = Lambdas
+✔ Repositories = DynamoDB
+✔ Frontend no se rompe
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+# 🎤 Speech final (para kata / entrevista)
 
-For end-to-end (e2e) testing, run:
+Guárdate este texto 👇
 
-```bash
-ng e2e
-```
+> “El backend no usa AWS directamente, pero está diseñado para simular su comportamiento.  
+> Los controllers representan API Gateway, los services la lógica de una Lambda y los repositories el acceso a DynamoDB.  
+> La data está mockeada, pero el diseño permite migrar a AWS sin tocar el frontend ni la lógica de negocio.  
+> En el frontend prioricé UX: no se muestran datos hasta que el usuario interactúa, y el filtro de fechas está pensado para cubrir el 80% de los casos con presets rápidos.”
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Esto **suena senior**, claro y seguro.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🟢 Conclusión
+
+🔹 Código limpio  
+🔹 Arquitectura correcta  
+🔹 UX pensada  
+🔹 Explicable en 2 minutos  
+🔹 Migrable a AWS  
+
+Ç_______¨

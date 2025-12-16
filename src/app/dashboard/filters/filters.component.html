@@ -1,0 +1,43 @@
+<!-- =========================
+     FILTROS PRINCIPALES
+     ========================= -->
+<div class="flex flex-wrap gap-4 mb-4 items-center">
+
+    <!-- TRIBU -->
+    <div class="relative">
+        <select class="filter-select" [(ngModel)]="selectedTribu" (change)="aplicarFiltros()">
+          <option value="">Todas las tribus</option>
+          <option *ngFor="let t of tribus" [value]="t">
+            {{ t }}
+          </option>
+        </select>
+    </div>
+
+    <!-- COE -->
+    <div class="relative">
+        <select class="filter-select" [(ngModel)]="selectedCoe" (change)="aplicarFiltros()">
+          <option value="">Todos los CoE</option>
+          <option *ngFor="let c of coes" [value]="c">
+            {{ c }}
+          </option>
+        </select>
+    </div>
+
+    <!-- BUSCAR -->
+    <div class="relative">
+        <input class="filter-input pr-8" type="text" placeholder="Buscar equipo…" [(ngModel)]="search" (input)="aplicarFiltros()" />
+        <span class="search-icon">🔍</span>
+    </div>
+
+</div>
+
+<!-- MENSAJE UX (igual al que ya tenías) -->
+<p *ngIf="!selectedTribu && !selectedCoe && !search" class="text-xs text-gray-400 mt-1">
+    Selecciona Tribu o CoE para ver las métricas.
+</p>
+
+<!-- =========================
+         FILTRO DE FECHA (REUTILIZABLE)
+         ========================= -->
+<app-date-filter class="block mt-4" (dateChange)="onDateChange($event)">
+</app-date-filter>

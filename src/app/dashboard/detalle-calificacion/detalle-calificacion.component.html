@@ -1,0 +1,211 @@
+<div class="container mx-auto px-6 py-10">
+
+    <!-- =========================
+       HEADER SUPERIOR
+       ========================= -->
+    <div class="flex justify-between items-center mb-12">
+
+        <!-- Título principal -->
+        <div class="space-y-1">
+            <p class="text-xs uppercase tracking-[0.35em] text-gray-400">
+                Detalle de Calificación
+            </p>
+
+            <h1 class="text-4xl font-extrabold leading-tight">
+                <span class="bg-gradient-to-r from-indigo-500 to-violet-500
+                 bg-clip-text text-transparent">
+          {{ equipo }}
+        </span>
+            </h1>
+        </div>
+
+        <!-- Botón volver -->
+        <button class="px-6 py-3 bg-gray-900 text-white rounded-2xl shadow-lg
+             hover:bg-black transition flex items-center gap-2" (click)="volver()">
+      <span>←</span>
+      <span>Volver al Dashboard</span>
+    </button>
+
+    </div>
+
+    <!-- =========================
+       CONTENIDO PRINCIPAL
+       ========================= -->
+    <ng-container *ngIf="categorias.length; else loading">
+
+        <div class="bg-[#050816] text-white rounded-3xl p-10
+             shadow-[0_35px_120px_rgba(15,23,42,0.8)]">
+
+            <!-- =========================
+           HEADER DEL INDICADOR
+           ========================= -->
+            <div class="flex justify-between items-start mb-12">
+
+                <!-- Título sección -->
+                <div class="space-y-1">
+                    <p class="text-[11px] uppercase tracking-[0.35em] text-gray-500">
+                        Indicador de calidad
+                    </p>
+
+                    <h2 class="text-2xl font-semibold tracking-tight">
+                        Categorías del indicador
+                    </h2>
+
+                    <div class="mt-2 h-[2px] w-12 rounded-full
+                   bg-gradient-to-r from-indigo-500 to-violet-500">
+                    </div>
+                </div>
+
+                <!-- Promedio general -->
+                <div class="text-right">
+                    <p class="text-xs uppercase tracking-widest text-gray-500">
+                        Promedio general
+                    </p>
+
+                    <p class="text-4xl font-extrabold text-indigo-400 drop-shadow-sm">
+                        {{ promedioGeneral | number:'1.2-2' }}%
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- =========================
+           LISTA DE CATEGORÍAS
+           ========================= -->
+            <div class="space-y-12">
+
+                <div *ngFor="let c of categorias" class="group relative">
+
+                    <!-- Título + estado -->
+                    <div class="flex items-center justify-between mb-4">
+
+                        <div class="flex items-center gap-4">
+                            <!-- Icono -->
+                            <div class="w-9 h-9 rounded-full
+                       bg-gradient-to-br from-slate-700 to-slate-500
+                       flex items-center justify-center
+                       font-bold text-sm shadow-lg">
+                                {{ c.icon }}
+                            </div>
+
+                            <!-- Textos -->
+                            <div>
+                                <h3 class="text-[17px] font-semibold tracking-tight text-white">
+                                    {{ c.nombre }}
+                                </h3>
+
+                                <p class="text-xs text-gray-400 leading-snug max-w-xl">
+                                    {{ c.descripcion }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Badge estado -->
+                        <div class="px-3 py-1 rounded-full text-xs font-semibold
+                     border backdrop-blur-sm" [ngClass]="getStatusClass(c.valor)">
+                            {{ getStatusLabel(c.valor) }}
+                        </div>
+
+                    </div>
+
+                    <!-- =========================
+               BARRA DE PROGRESO
+               ========================= -->
+                    <div class="relative">
+
+                        <div class="bar-wrapper cursor-pointer">
+                            <div class="bar-bg"></div>
+
+                            <div class="bar-fill" [style.width.%]="c.valor" [style.background]="getGradient(c.valor)" [style.boxShadow]="getShadow(c.valor)">
+                            </div>
+                        </div>
+
+                        <!-- Porcentaje -->
+                        <div class="mt-1 text-right text-sm font-semibold" [style.color]="getTextColor(c.valor)">
+                            {{ c.valor | number:'1.2-2' }}%
+                        </div>
+
+                        <!-- =========================
+                 TOOLTIP AVANZADO
+                 ========================= -->
+                        <div class="absolute left-0 mt-4 w-full max-w-xl
+                     bg-[#020617] border border-white/10
+                     rounded-2xl p-4 shadow-2xl
+                     opacity-0 scale-95 transform origin-top-left
+                     transition-all duration-200
+                     group-hover:opacity-100 group-hover:scale-100
+                     pointer-events-none z-20">
+
+                            <p class="text-xs text-gray-400 mb-3">
+                                Desglose por métricas
+                            </p>
+
+                            <!-- Sparkline -->
+                            <div class="flex items-end gap-1 h-14 mb-3">
+                                <div *ngFor="let m of c.metricas" class="flex-1 rounded-full" [style.height.%]="getBarHeight(m[1])" [style.background]="getSparkColor(m[1])">
+                                </div>
+                            </div>
+
+                            <!-- Lista métricas -->
+                            <div class="space-y-1 max-h-40 overflow-y-auto pr-1">
+                                <div *ngFor="let m of c.metricas" class="flex justify-between text-[11px] text-gray-300">
+                                    <span class="truncate mr-2">
+                    {{ m[0] }}
+                  </span>
+
+                                    <span class="font-semibold" [style.color]="getTextColor(m[1])">
+                    {{ m[1] | number:'1.0-2' }}%
+                  </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </ng-container>
+
+    <!-- =========================
+       LOADING
+       ========================= -->
+    <ng-template #loading>
+        <div class="text-gray-500 text-center mt-16">
+            Cargando datos del indicador…
+        </div>
+    </ng-template>
+
+</div>
+
+<!-- =========================
+     ESTILOS PREMIUM
+     ========================= -->
+<style>
+    .bar-wrapper {
+        position: relative;
+        width: 100%;
+        height: 16px;
+        border-radius: 9999px;
+        overflow: hidden;
+    }
+
+    .bar-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(148, 163, 184, 0.3), transparent), rgba(15, 23, 42, 0.95);
+        border-radius: 9999px;
+    }
+
+    .bar-fill {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        border-radius: 9999px;
+        transition: width 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.4s ease;
+    }
+</style>

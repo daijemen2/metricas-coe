@@ -1,0 +1,107 @@
+<div class="max-w-7xl mx-auto px-6 mt-12">
+
+    <!-- Header -->
+    <div class="mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-3">
+            Centro de Métricas del CoE
+        </h1>
+        <p class="text-lg text-gray-600 max-w-3xl">
+            Supervisa la calidad, ejecución y madurez de pruebas del CoE. Accede a dashboards diseñados para toma de decisiones técnicas y de negocio.
+        </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Dashboard (PRIMARIO) -->
+        <div routerLink="/dashboard" class="relative p-7 bg-white rounded-2xl border-2 border-indigo-500
+             shadow-lg hover:shadow-2xl hover:-translate-y-1 transition
+             cursor-pointer group">
+
+            <!-- Badge -->
+            <span class="absolute top-4 right-4 text-xs font-semibold
+                   bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">
+        Principal
+      </span>
+
+            <div class="flex items-center gap-4 mb-5">
+                <div class="p-4 rounded-xl bg-indigo-100 text-indigo-600
+                    group-hover:bg-indigo-600 group-hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 3v18h18" />
+            <path d="M7 14l3-3 4 4 5-8" />
+          </svg>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900">
+                    Dashboard de Métricas
+                </h2>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                KPIs de calidad, cobertura, automatización y cumplimiento por equipo, tribu y CoE.
+            </p>
+
+            <div class="text-indigo-600 font-semibold flex items-center gap-2">
+                Explorar métricas
+                <span class="text-lg">→</span>
+            </div>
+        </div>
+
+        <!-- Ejecución -->
+        <div routerLink="/ejecucion" class="p-7 bg-white rounded-2xl border border-gray-200
+             shadow-md hover:shadow-xl hover:-translate-y-1 transition
+             cursor-pointer group">
+
+            <div class="flex items-center gap-4 mb-5">
+                <div class="p-4 rounded-xl bg-green-100 text-green-600
+                    group-hover:bg-green-600 group-hover:text-white transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 2v20" />
+            <path d="M2 12h20" />
+          </svg>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900">
+                    Ejecución de Pruebas
+                </h2>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                Resultados reales de pipelines CI/CD: frontend/backend, seguridad y performance.
+            </p>
+
+            <div class="text-green-600 font-semibold flex items-center gap-2">
+                Ver ejecuciones
+                <span class="text-lg">→</span>
+            </div>
+        </div>
+
+        <!-- Módulo futuro -->
+        <div class="p-7 bg-gray-50 rounded-2xl border border-dashed border-gray-300
+             cursor-not-allowed opacity-70">
+
+            <div class="flex items-center gap-4 mb-5">
+                <div class="p-4 rounded-xl bg-yellow-100 text-yellow-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z" />
+          </svg>
+                </div>
+
+                <h2 class="text-xl font-semibold text-gray-900">
+                    Módulo Adicional
+                </h2>
+            </div>
+
+            <p class="text-gray-500">
+                Próximamente: analítica avanzada, reportes ejecutivos e integración CI/CD.
+            </p>
+
+            <span class="inline-block mt-4 text-xs font-semibold
+                   bg-gray-200 text-gray-700 px-3 py-1 rounded-full">
+        Próximamente
+      </span>
+        </div>
+
+    </div>
+</div>

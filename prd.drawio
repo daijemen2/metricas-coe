@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Arquitectura AWS - Producción">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="cdn" value="CloudFront" style="rounded=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="20" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="s3" value="S3 Static Website&#10;(Angular App)" style="rounded=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="apigw" value="API Gateway" style="rounded=1;fillColor=#ECFEFF;strokeColor=#0891B2;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="190" width="260" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="lambda" value="Lambda Functions&#10;(Metrics / Ejecución)" style="rounded=1;fillColor=#FFF7ED;strokeColor=#EA580C;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="280" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ddb" value="DynamoDB&#10;PK: equipo&#10;GSI: timestamp" style="rounded=1;fillColor=#FEFCE8;strokeColor=#CA8A04;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="380" y="380" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="a1" style="endArrow=block" edge="1" parent="1" source="cdn" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="endArrow=block" edge="1" parent="1" source="s3" target="apigw"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="endArrow=block" edge="1" parent="1" source="apigw" target="lambda"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="endArrow=block" edge="1" parent="1" source="lambda" target="ddb"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

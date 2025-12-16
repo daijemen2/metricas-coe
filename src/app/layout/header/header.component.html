@@ -1,0 +1,35 @@
+<header class="bg-white border-b shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Breadcrumb -->
+        <nav class="flex items-center text-sm text-gray-600 gap-2">
+            <ng-container *ngFor="let crumb of breadcrumbs(); let last = last">
+
+                <a *ngIf="!last" [routerLink]="crumb.url" class="hover:text-indigo-600 transition font-medium">
+          {{ crumb.label }}
+        </a>
+
+                <span *ngIf="last" class="font-semibold text-gray-900">
+          {{ crumb.label }}
+        </span>
+
+                <span *ngIf="!last" class="text-gray-400">›</span>
+
+            </ng-container>
+        </nav>
+
+        <!-- Usuario -->
+        <div class="flex items-center gap-3">
+            <div class="text-right">
+                <p class="text-sm font-medium text-gray-800">{{ user.name }}</p>
+                <p class="text-xs text-gray-500">{{ user.role }}</p>
+            </div>
+
+            <div class="w-9 h-9 rounded-full bg-indigo-600 text-white
+                  flex items-center justify-center font-semibold">
+                {{ user.avatar }}
+            </div>
+        </div>
+
+    </div>
+</header>

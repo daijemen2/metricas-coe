@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="AWS Serverless Architecture - CoE Metrics">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- User -->
+        <mxCell id="user" value="Usuarios / Navegador" style="ellipse;fillColor=#E5E7EB;strokeColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="420" y="20" width="180" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- CloudFront -->
+        <mxCell id="cf" value="Amazon CloudFront" style="rounded=1;fillColor=#0F172A;strokeColor=#38BDF8;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="420" y="100" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- S3 -->
+        <mxCell id="s3" value="Amazon S3&#10;Static Website (Angular)" style="rounded=1;fillColor=#020617;strokeColor=#38BDF8;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="400" y="190" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- API Gateway -->
+        <mxCell id="api" value="Amazon API Gateway" style="rounded=1;fillColor=#022C22;strokeColor=#34D399;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="410" y="290" width="240" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Lambda Metrics -->
+        <mxCell id="lambdaGet" value="AWS Lambda&#10;Metrics / Ejecución (GET)" style="rounded=1;fillColor=#1C1917;strokeColor=#FB923C;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="250" y="400" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Lambda Ingest -->
+        <mxCell id="lambdaIngest" value="AWS Lambda&#10;Ingesta / Normalización (POST)" style="rounded=1;fillColor=#1C1917;strokeColor=#F97316;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="550" y="400" width="300" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- DynamoDB -->
+        <mxCell id="ddb" value="Amazon DynamoDB&#10;PK: equipo&#10;GSI: timestamp" style="rounded=1;fillColor=#111827;strokeColor=#FACC15;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="420" y="520" width="280" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Ingest Sources -->
+        <mxCell id="grafana" value="Grafana / OpenSearch" style="rounded=1;fillColor=#312E81;strokeColor=#818CF8;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="760" y="290" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ci" value="CI/CD Pipelines" style="rounded=1;fillColor=#312E81;strokeColor=#818CF8;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="760" y="200" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="e1" style="endArrow=block" edge="1" parent="1" source="user" target="cf"/>
+        <mxCell id="e2" style="endArrow=block" edge="1" parent="1" source="cf" target="s3"/>
+        <mxCell id="e3" style="endArrow=block" edge="1" parent="1" source="s3" target="api"/>
+        <mxCell id="e4" style="endArrow=block" edge="1" parent="1" source="api" target="lambdaGet"/>
+        <mxCell id="e5" style="endArrow=block" edge="1" parent="1" source="api" target="lambdaIngest"/>
+        <mxCell id="e6" style="endArrow=block" edge="1" parent="1" source="lambdaGet" target="ddb"/>
+        <mxCell id="e7" style="endArrow=block" edge="1" parent="1" source="lambdaIngest" target="ddb"/>
+        <mxCell id="e8" style="endArrow=block" edge="1" parent="1" source="grafana" target="api"/>
+        <mxCell id="e9" style="endArrow=block" edge="1" parent="1" source="ci" target="api"/>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
